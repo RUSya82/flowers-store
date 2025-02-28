@@ -3,6 +3,7 @@ import { Flower } from '@prisma/client';
 import { PrismaService } from '../prisma.service';
 import { CreateFlowersDto } from './createFlowers.dto';
 import { ConfigService } from '@nestjs/config';
+import { EnumAppMode } from '../types';
 
 @Injectable()
 export class FlowersService {
@@ -18,26 +19,7 @@ export class FlowersService {
 	}
 
 	findAll(){
-		console.log(this.configService.get('TEST'));
+		console.log(this.configService.get<EnumAppMode>('MODE'));
 		return  this.prismaService.flower.findMany();
-
-
-		// return [
-		// 	{
-		// 		name: 'rose',
-		// 		color: 'Red',
-		// 		price: 5
-		// 	},
-		// 	{
-		// 		name: 'Lily',
-		// 		color: 'White',
-		// 		price: 6
-		// 	},
-		// 	{
-		// 		name: 'Tulip',
-		// 		color: 'Yellow',
-		// 		price: 7
-		// 	},
-		// ];
 	}
 }
